@@ -13,9 +13,13 @@ node {
        
     }
 
-
+   stage('Apply chnages to the environmnet')
+        sh "ls -l"
+        sh "php -S localhost:5000"
+    }
 
 }
+
 } catch(Error|Exception e) {
   //Finish failing the build after telling someone about it
   throw e
@@ -49,3 +53,7 @@ def notifySlack(additionalInfo = '') {
     def summary = "${subject}\nChanges: ${commitText}\nBranch: ${env.GIT_BRANCH}\n${additionalInfo}"
     slackSend channel: "${env.SLACK_CHANNEL}", color: colorCode, message: summary, teamDomain: "${env.SLACK_TEAM_DOMAIN}", token: "${env.SLACK_TOKEN}"
 }
+
+
+
+
